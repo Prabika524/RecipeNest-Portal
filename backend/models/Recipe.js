@@ -14,16 +14,15 @@ const recipeSchema = new mongoose.Schema({
   imageURL: { type: String, default: '' },
   category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
   chef: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  reviews: [reviewSchema],
+  reviews: { type: [reviewSchema], default: [] },
   cookTime: { type: String, default: '' },
-  servings: { type: Number, default: 4 },
   difficulty: { type: String, enum: ['Easy', 'Medium', 'Hard'], default: 'Medium' },
   isPublished: { type: Boolean, default: true },
   views: { type: Number, default: 0 },
 }, { timestamps: true });
 
 recipeSchema.virtual('averageRating').get(function () {
-  if (this.reviews.length === 0) return 0;
+  if (!this.reviews || this.reviews.length === 0) return 0;
   const sum = this.reviews.reduce((acc, r) => acc + r.rating, 0);
   return (sum / this.reviews.length).toFixed(1);
 });
