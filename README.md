@@ -1,222 +1,178 @@
-# 🍳 RecipeNest – ChefPortal
+# RecipeNest — University Assignment Viva README
 
-A full-stack MERN web application for discovering, sharing, and managing recipes. Built for the CIS051-2 Web Technologies & Platforms assignment.
+## 1. Project Overview
+RecipeNest is a full-stack MERN web application designed for recipe discovery, sharing, and management. It supports three user roles — regular users, chefs, and administrators — and demonstrates practical skills in React, Express, MongoDB, JWT authentication, and responsive UI design.
 
----
+This project is developed as part of a university assignment for CIS051-2 Web Technologies & Platforms.
 
-## Tech Stack
+## 2. Key Objectives
+- Build a modern web application using the MERN stack
+- Implement role-based authentication and authorization
+- Support CRUD operations for recipes and categories
+- Enable user interaction through reviews, bookmarks, and chef profiles
+- Provide an admin dashboard for platform monitoring and management
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18, React Router v6, Axios |
-| Backend | Node.js, Express.js |
-| Database | MongoDB + Mongoose ODM |
-| Auth | JWT (JSON Web Tokens) + bcryptjs |
-| Styling | Custom CSS (light orange theme, Google Fonts) |
+## 3. Technology Stack
+- Frontend: React 18, React Router v6, Axios
+- Backend: Node.js, Express.js
+- Database: MongoDB with Mongoose ODM
+- Authentication: JWT + bcryptjs
+- Styling: Custom CSS with responsive design
+- Dev tools: Nodemon, Create React App
 
----
+## 4. Application Features
 
-## Project Structure
+### User Features
+- Browse and search published recipes
+- Filter recipes by category
+- View full recipe details with ingredients and instructions
+- Rate and review recipes
+- Save/bookmark favourite recipes
+- Update user profile information
+
+### Chef Features
+- Create, edit, and delete own recipes
+- Manage recipe visibility and metadata
+- View chef dashboard with recipe statistics
+- Public chef profile page
+
+### Admin Features
+- View overall analytics: users, recipes, views, ratings
+- Manage users and roles
+- Manage recipe categories
+
+## 5. Project Structure
 
 ```
 recipenest/
 ├── backend/
 │   ├── models/
-│   │   ├── User.js          # User schema (user/chef/admin roles)
-│   │   ├── Recipe.js        # Recipe schema with embedded reviews
-│   │   └── Category.js      # Recipe category schema
 │   ├── routes/
-│   │   ├── auth.js          # Register, login, profile
-│   │   ├── recipes.js       # CRUD recipes, reviews, bookmarks
-│   │   ├── categories.js    # Category management
-│   │   └── admin.js         # Admin: users, analytics
 │   ├── middleware/
-│   │   └── auth.js          # protect + authorize middleware
-│   ├── server.js            # Express app + MongoDB connection
-│   ├── seed.js              # Seed data script
-│   └── .env.example         # Environment variable template
-│
+│   ├── server.js
+│   └── seed.js
 └── frontend/
     └── src/
-        ├── context/
-        │   └── AuthContext.js       # Global auth state
         ├── components/
-        │   ├── Navbar.js            # Sticky navigation bar
-        │   ├── RecipeCard.js        # Recipe grid card
-        │   └── RecipeFormModal.js   # Create/edit recipe modal
+        ├── context/
         └── pages/
-            ├── Home.js              # Landing page + hero
-            ├── Login.js             # Sign in page
-            ├── Register.js          # Join us / sign up page
-            ├── Recipes.js           # Browse + search + filter
-            ├── RecipeDetail.js      # Full recipe + reviews
-            ├── Chefs.js             # Chef directory
-            ├── ChefProfile.js       # Public chef profile
-            ├── UserDashboard.js     # User: bookmarks + profile
-            ├── ChefDashboard.js     # Chef portal: recipes + stats
-            └── AdminDashboard.js    # Admin: analytics, users, categories
 ```
 
----
+### Backend
+- `models/`: Mongoose schemas for `User`, `Recipe`, `Category`
+- `routes/`: API routes for authentication, recipes, categories, admin
+- `middleware/auth.js`: protects endpoints and checks user roles
+- `server.js`: Express setup, database connection, route mounting
+- `seed.js`: initial data loader for testing
 
-## Prerequisites
+### Frontend
+- `src/context/AuthContext.js`: handles authentication state
+- `src/components`: reusable UI components like navigation, recipe cards, modals
+- `src/pages`: page components for home, login, recipes, dashboards
 
-- **Node.js** v18+
-- **MongoDB** running locally on `mongodb://localhost:27017` (or supply a MongoDB Atlas URI)
-- **npm** v9+
+## 6. Setup Instructions
 
-Install MongoDB Community Edition: https://www.mongodb.com/try/download/community
+### Prerequisites
+- Node.js v18+
+- npm v9+
+- MongoDB running locally or through a cloud URI
 
----
+### Installation
+1. Clone the repository
+2. Install dependencies
+   ```bash
+   cd recipenest
+   npm install --prefix backend
+   npm install --prefix frontend
+   ```
+3. Configure environment variables
+   ```bash
+   cp backend/.env.example backend/.env
+   ```
+4. Seed the database
+   ```bash
+   cd backend
+   node seed.js
+   ```
+5. Run the application
+   - Backend: `npm run dev --prefix backend`
+   - Frontend: `npm start --prefix frontend`
 
-## Quick Start
+Open the frontend at `http://localhost:3000`.
 
-### 1. Clone / unzip the project
+## 7. Demo Accounts
+Use seeded credentials for testing:
+- Admin: `admin@recipenest.com` / `admin123`
+- Chef: `sarah@recipenest.com` / `chef123`
+- Chef: `michael@recipenest.com` / `chef123`
+- User: `emily@recipenest.com` / `user123`
 
-```bash
-cd recipenest
-```
+## 8. Important Endpoints
 
-### 2. Set up environment variables
-
-```bash
-cp backend/.env.example backend/.env
-# Edit backend/.env if needed (change MONGODB_URI or JWT_SECRET)
-```
-
-### 3. Install dependencies
-
-```bash
-# Backend
-cd backend && npm install
-
-# Frontend
-cd ../frontend && npm install
-```
-
-### 4. Seed the database
-
-```bash
-# From the backend folder
-cd backend
-node seed.js
-```
-
-This creates:
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@recipenest.com | admin123 |
-| Chef | sarah@recipenest.com | chef123 |
-| Chef | michael@recipenest.com | chef123 |
-| User | emily@recipenest.com | user123 |
-
-### 5. Start the servers
-
-**Terminal 1 – Backend**
-```bash
-cd backend
-npm run dev        # runs on http://localhost:5000
-```
-
-**Terminal 2 – Frontend**
-```bash
-cd frontend
-npm start          # runs on http://localhost:3000
-```
-
-Open **http://localhost:3000** in your browser.
-
----
-
-## Features by Role
-
-### 👤 Food Lover (User)
-- Browse and search all published recipes
-- Filter by category, sort by newest / most viewed / top rated
-- View full recipe details (ingredients, instructions, cook time)
-- Rate and review recipes
-- Bookmark / save favourite recipes
-- Edit personal profile
-
-### 👨‍🍳 Chef
-- All user features
-- **Chef Portal** dashboard with stats (recipe count, views, avg rating)
-- Create, edit, delete own recipes
-- Manage recipe details: title, description, ingredients, instructions, image, category, difficulty, cook time, servings, publish status
-- View public chef profile page
-
-### ⚙️ Admin
-- Platform analytics (total users, recipes, views, reviews)
-- Full user management (search, change roles, delete users)
-- Recipe category management (add, edit, delete)
-- View recent recipe activity
-
----
-
-## API Endpoints
-
-### Auth
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | /api/auth/register | Register new user |
-| POST | /api/auth/login | Login |
-| GET | /api/auth/me | Get current user |
-| PUT | /api/auth/profile | Update profile |
+### Authentication
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+- `PUT /api/auth/profile`
 
 ### Recipes
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /api/recipes | List recipes (search, filter, paginate) |
-| GET | /api/recipes/:id | Get single recipe |
-| POST | /api/recipes | Create recipe (chef/admin) |
-| PUT | /api/recipes/:id | Update recipe |
-| DELETE | /api/recipes/:id | Delete recipe |
-| POST | /api/recipes/:id/reviews | Add review |
-| POST | /api/recipes/:id/bookmark | Toggle bookmark |
-| GET | /api/recipes/chef/:chefId | Recipes by chef |
+- `GET /api/recipes`
+- `GET /api/recipes/:id`
+- `POST /api/recipes`
+- `PUT /api/recipes/:id`
+- `DELETE /api/recipes/:id`
+- `POST /api/recipes/:id/reviews`
+- `POST /api/recipes/:id/bookmark`
 
 ### Categories
-| Method | Endpoint | Auth |
-|--------|----------|------|
-| GET | /api/categories | Public |
-| POST | /api/categories | Admin |
-| PUT | /api/categories/:id | Admin |
-| DELETE | /api/categories/:id | Admin |
+- `GET /api/categories`
+- `POST /api/categories`
+- `PUT /api/categories/:id`
+- `DELETE /api/categories/:id`
 
 ### Admin
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /api/admin/analytics | Platform stats |
-| GET | /api/admin/users | List all users |
-| PUT | /api/admin/users/:id | Update user role |
-| DELETE | /api/admin/users/:id | Delete user |
+- `GET /api/admin/analytics`
+- `GET /api/admin/users`
+- `PUT /api/admin/users/:id`
+- `DELETE /api/admin/users/:id`
 
----
-
-## Database Schema
+## 9. Database Schema Summary
 
 ### User
-```
-_id, name, email, password (hashed), role (user|chef|admin),
-bio, profileImage, bookmarks[], createdAt, updatedAt
-```
+- `name`, `email`, `password`, `role`, `bio`, `profileImage`, `bookmarks`
 
 ### Recipe
-```
-_id, title, description, ingredients[], instructions, imageURL,
-category (ref), chef (ref), reviews[], cookTime, servings,
-difficulty, isPublished, views, createdAt, updatedAt
-```
+- `title`, `description`, `ingredients`, `instructions`, `imageURL`
+- `category`, `chef`, `reviews`, `cookTime`, `servings`, `difficulty`, `isPublished`, `views`
 
-### Review (embedded in Recipe)
-```
-user (ref), rating (1-5), comment, createdAt
-```
+### Review
+- `user`, `rating`, `comment`, timestamps
 
 ### Category
-```
-_id, name, description, createdBy (ref), createdAt
-```
+- `name`, `description`, `createdBy`
+
+## 10. Viva Talking Points
+- Explain the MERN architecture and how frontend/backed are separated
+- Describe JWT authentication flow and role-based access control
+- Discuss schema design for recipes, reviews, and categories
+- Show how React Router enables page navigation
+- Highlight CRUD operations: recipe creation, editing, deletion
+- Mention responsive UI and polished landing page design
+- Point out admin analytics as an example of platform management
+
+## 11. Future Enhancements
+- Add user following / social interactions
+- Enable file uploads for recipe images
+- Add pagination and more advanced search filters
+- Improve dashboard charts and analytics visuals
+- Add email verification and password reset flow
+
+## 12. Notes for Evaluation
+- This project demonstrates a complete full-stack web app
+- Clear separation of concerns: UI, API, data layer
+- Role-based security with protected routes
+- Usable and extensible architecture for future enhancements
+- Functional user flows across regular users, chefs, and admin
 
 ---
 

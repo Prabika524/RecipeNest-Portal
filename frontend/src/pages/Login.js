@@ -76,14 +76,6 @@ export default function Login() {
         <hr className="divider" />
 
         <div style={{ textAlign: 'center', fontSize: '0.875rem' }}>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
-            Demo accounts:
-          </p>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', lineHeight: 1.8 }}>
-            admin@recipenest.com / admin123<br />
-            sarah@recipenest.com / chef123<br />
-            emily@recipenest.com / user123
-          </p>
         </div>
 
         <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>

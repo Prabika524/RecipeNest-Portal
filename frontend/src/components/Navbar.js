@@ -32,7 +32,7 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <button className="btn btn-ghost btn-sm" onClick={() => navigate('/login')}>Sign In</button>
+              <button className="btn btn-ghost btn-sm" onClick={() => navigate('/login')}>Login</button>
               <button className="btn btn-primary btn-sm" onClick={() => navigate('/register')}>Join Us</button>
             </>
           )}

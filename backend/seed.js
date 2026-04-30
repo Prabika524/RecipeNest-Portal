@@ -13,6 +13,8 @@ const seed = async () => {
   console.log('Connected to MongoDB');
 
   await User.deleteMany({});
+
+  
   await Category.deleteMany({});
   await Recipe.deleteMany({});
 
