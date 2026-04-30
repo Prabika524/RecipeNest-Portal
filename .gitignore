@@ -1,6 +1,6 @@
 # Node dependencies
 node_modules/
-
+VIVA_README.md
 # Environment files
 *.env
 
